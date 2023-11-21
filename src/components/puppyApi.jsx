@@ -7,28 +7,34 @@ const [puppyArray, setPuppyArray] = useState([]);
 
     useEffect(() => {
  const fetchPups = async() => {
-
     try {
     const response = await fetch(url);
     const result = await response.json();
-    const pupData = result.data;
+    const pupData = result.data.players;
+    console.log(pupData);
     setPuppyArray(pupData);
+    console.log(setPuppyArray);
+
     }
     catch(error) {
     console.log(`error fetching!`, error)
     }
-
  }
-
  fetchPups();
  console.log(puppyArray);
 
  }, []);
 
     return (
-    <h2>Puppy Roster</h2>
-        {puppyArray.map()}
-    )
+        <div>
+      <h2>Puppy Roster</h2>
+      <ul>
+        {puppyArray.map((puppy) => (
+          <li key={puppy.id}>{puppy.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 
